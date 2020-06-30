@@ -73,8 +73,19 @@
 					</view>
 				</view>
 				<view class="right">
-					<view class="item">1</view>
-					<view class="item">2</view>
+					<view class="item">
+						<view>
+							<text class="primary">生鲜旺季</text>
+						</view>
+						<image src="../../../static/img/lz@2x.png" mode=""></image>
+					</view>
+					<view class="item">
+						<view>
+							<text class="hot">超值优惠</text>
+							<text class="gray">先领券再购物</text>
+						</view>
+						<image src="../../../static/img/lz@2x.png"></image>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -174,7 +185,7 @@
 						img: '/static/img/category/8.png'
 					}
 				],
-				Promotion: [],
+				// Promotion: [],
 				//猜你喜欢列表
 				productList: [{
 						goods_id: 0,
@@ -299,120 +310,120 @@
 			this.showHeader = false;
 			this.statusHeight = plus.navigator.getStatusbarHeight();
 			// #endif
-			this.amapPlugin = new amap.AMapWX({
-				//高德地图KEY，随时失效，请务必替换为自己的KEY，参考：http://ask.dcloud.net.cn/article/35070
-				key: '7c235a9ac4e25e482614c6b8eac6fd8e'
-			});
-			//定位地址
-			this.amapPlugin.getRegeo({
-				success: data => {
-					this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
-					// #ifdef APP-PLUS
-					this.nVueTitle.postMessage({
-						type: 'location',
-						city: this.city
-					});
-					// #endif
-				}
-			});
+			// this.amapPlugin = new amap.AMapWX({
+			// 	//高德地图KEY，随时失效，请务必替换为自己的KEY，参考：http://ask.dcloud.net.cn/article/35070
+			// 	key: '7c235a9ac4e25e482614c6b8eac6fd8e'
+			// });
+			// //定位地址
+			// this.amapPlugin.getRegeo({
+			// 	success: data => {
+			// 		this.city = data[0].regeocodeData.addressComponent.city.replace(/市/g, ''); //把"市"去掉
+			// 		// #ifdef APP-PLUS
+			// 		this.nVueTitle.postMessage({
+			// 			type: 'location',
+			// 			city: this.city
+			// 		});
+			// 		// #endif
+			// 	}
+			// });
 			//开启定时器
-			this.Timer();
+			// this.Timer();
 			//加载活动专区
-			this.loadPromotion();
+			// this.loadPromotion();
 		},
 		methods: {
 			//加载Promotion 并设定倒计时,,实际应用中应该是ajax加载此数据。
-			loadPromotion() {
-				let cutTime = new Date();
-				let yy = cutTime.getFullYear(),
-					mm = cutTime.getMonth() + 1,
-					dd = cutTime.getDate();
-				let tmpcountdown = yy + '/' + mm + '/' + dd + ' 23:59:59';
-				let tmpPromotion = [{
-						title: '整点秒杀',
-						ad: '整天秒杀专区',
-						img: '/static/img/s1.jpg',
-						countdown: false
-					},
-					{
-						title: '限时抢购',
-						ad: '每天23点上线',
-						img: '/static/img/s2.jpg',
-						countdown: tmpcountdown
-					} //countdown为目标时间，程序会获取当前时间倒数
-				];
-				//检查倒计时
-				for (let i = 0; i < tmpPromotion.length; i++) {
-					let row = tmpPromotion[i];
-					if (row.countdown) {
-						let h = '00',
-							m = '00',
-							s = '00';
-						let currentTime = new Date();
-						let cutoffTime = new Date(tmpcountdown);
-						if (!(currentTime >= cutoffTime)) {
-							let countTime = parseInt(
-								(cutoffTime.getTime() - currentTime.getTime()) / 1000
-							);
-							h = parseInt(countTime / 3600);
-							m = parseInt((countTime % 3600) / 60);
-							s = countTime % 60;
-							h = h < 10 ? '0' + h : h;
-							m = m < 10 ? '0' + m : m;
-							s = s < 10 ? '0' + s : s;
-						}
-						tmpPromotion[i].countdown = {
-							h: h,
-							m: m,
-							s: s
-						};
-					}
-				}
-				this.Promotion = tmpPromotion;
-			},
+			// loadPromotion() {
+			// 	let cutTime = new Date();
+			// 	let yy = cutTime.getFullYear(),
+			// 		mm = cutTime.getMonth() + 1,
+			// 		dd = cutTime.getDate();
+			// 	let tmpcountdown = yy + '/' + mm + '/' + dd + ' 23:59:59';
+			// 	let tmpPromotion = [{
+			// 			title: '整点秒杀',
+			// 			ad: '整天秒杀专区',
+			// 			img: '/static/img/s1.jpg',
+			// 			countdown: false
+			// 		},
+			// 		{
+			// 			title: '限时抢购',
+			// 			ad: '每天23点上线',
+			// 			img: '/static/img/s2.jpg',
+			// 			countdown: tmpcountdown
+			// 		} //countdown为目标时间，程序会获取当前时间倒数
+			// 	];
+			// 	//检查倒计时
+			// 	for (let i = 0; i < tmpPromotion.length; i++) {
+			// 		let row = tmpPromotion[i];
+			// 		if (row.countdown) {
+			// 			let h = '00',
+			// 				m = '00',
+			// 				s = '00';
+			// 			let currentTime = new Date();
+			// 			let cutoffTime = new Date(tmpcountdown);
+			// 			if (!(currentTime >= cutoffTime)) {
+			// 				let countTime = parseInt(
+			// 					(cutoffTime.getTime() - currentTime.getTime()) / 1000
+			// 				);
+			// 				h = parseInt(countTime / 3600);
+			// 				m = parseInt((countTime % 3600) / 60);
+			// 				s = countTime % 60;
+			// 				h = h < 10 ? '0' + h : h;
+			// 				m = m < 10 ? '0' + m : m;
+			// 				s = s < 10 ? '0' + s : s;
+			// 			}
+			// 			tmpPromotion[i].countdown = {
+			// 				h: h,
+			// 				m: m,
+			// 				s: s
+			// 			};
+			// 		}
+			// 	}
+			// 	this.Promotion = tmpPromotion;
+			// },
 			//定时器
-			Timer() {
-				setInterval(() => {
-					if (this.Promotion.length > 0) {
-						for (let i = 0; i < this.Promotion.length; i++) {
-							let row = this.Promotion[i];
-							if (row.countdown) {
-								if (
-									!(
-										row.countdown.h == 0 &&
-										row.countdown.m == 0 &&
-										row.countdown.s == 0
-									)
-								) {
-									if (row.countdown.s > 0) {
-										row.countdown.s--;
-										row.countdown.s =
-											row.countdown.s < 10 ?
-											'0' + row.countdown.s :
-											row.countdown.s;
-									} else if (row.countdown.m > 0) {
-										row.countdown.m--;
-										row.countdown.m =
-											row.countdown.m < 10 ?
-											'0' + row.countdown.m :
-											row.countdown.m;
-										row.countdown.s = 59;
-									} else if (row.countdown.h > 0) {
-										row.countdown.h--;
-										row.countdown.h =
-											row.countdown.h < 10 ?
-											'0' + row.countdown.h :
-											row.countdown.h;
-										row.countdown.m = 59;
-										row.countdown.s = 59;
-									}
-									this.Promotion[i].countdown = row.countdown;
-								}
-							}
-						}
-					}
-				}, 1000);
-			},
+			// Timer() {
+			// 	setInterval(() => {
+			// 		if (this.Promotion.length > 0) {
+			// 			for (let i = 0; i < this.Promotion.length; i++) {
+			// 				let row = this.Promotion[i];
+			// 				if (row.countdown) {
+			// 					if (
+			// 						!(
+			// 							row.countdown.h == 0 &&
+			// 							row.countdown.m == 0 &&
+			// 							row.countdown.s == 0
+			// 						)
+			// 					) {
+			// 						if (row.countdown.s > 0) {
+			// 							row.countdown.s--;
+			// 							row.countdown.s =
+			// 								row.countdown.s < 10 ?
+			// 								'0' + row.countdown.s :
+			// 								row.countdown.s;
+			// 						} else if (row.countdown.m > 0) {
+			// 							row.countdown.m--;
+			// 							row.countdown.m =
+			// 								row.countdown.m < 10 ?
+			// 								'0' + row.countdown.m :
+			// 								row.countdown.m;
+			// 							row.countdown.s = 59;
+			// 						} else if (row.countdown.h > 0) {
+			// 							row.countdown.h--;
+			// 							row.countdown.h =
+			// 								row.countdown.h < 10 ?
+			// 								'0' + row.countdown.h :
+			// 								row.countdown.h;
+			// 							row.countdown.m = 59;
+			// 							row.countdown.s = 59;
+			// 						}
+			// 						this.Promotion[i].countdown = row.countdown;
+			// 					}
+			// 				}
+			// 			}
+			// 		}
+			// 	}, 1000);
+			// },
 			//消息列表
 			toMsg() {
 				uni.navigateTo({
@@ -723,7 +734,6 @@
 		.list {
 			width: 100%;
 			display: flex;
-			border: 1upx solid #59D861;
 
 			.left {
 				width: 50%;
@@ -752,6 +762,7 @@
 
 				.image-box {
 					position: relative;
+
 					.bg-box {
 						width: 238upx;
 						height: 240upx;
@@ -759,6 +770,7 @@
 						z-index: 0;
 						margin-top: 60upx;
 					}
+
 					.realy-box {
 						box-sizing: border-box;
 						width: 200upx;
@@ -766,18 +778,20 @@
 						z-index: 20;
 						position: absolute;
 						top: -34upx;
-						padding: 38upx 20upx;
+						padding: 38upx 20upx 20upx 20upx;
 						background-color: #fff;
 						flex-direction: column;
 						justify-content: start;
 						align-items: center;
+
 						image {
 							margin-top: 20upx;
 							width: 137upx;
 							height: 115upx;
 						}
+
 						.price {
-							margin-top: 24upx;
+							margin-top: 40upx;
 							background-color: $uni-color-error;
 							border-radius: 25upx;
 							font-size: 27upx;
@@ -789,9 +803,49 @@
 			}
 
 			.right {
+				display: flex;
+				flex-direction: column;
 				width: 50%;
-				flex-basis: 1;
-				border: 1upx solid #59D861;
+				min-height: 100%;
+
+				.item {
+					display: inline-block;
+					height: 50%;
+					padding: 20upx;
+					position: relative;
+					font-size: 30upx;
+					border: 1upx solid #59D861;
+
+					image {
+						margin: auto;
+						top: 100upx;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						position: absolute;
+						width: 136upx;
+						height: 126upx;
+					}
+
+					.primary {
+						color: $uni-color-primary;
+					}
+
+					.hot {
+						color: #FF0000;
+						font-size: 36upx;
+					}
+
+					text {
+						display: inline-block;
+						width: 100%;
+					}
+
+					.gray {
+						font-size: 24upx;
+						color: #666;
+					}
+				}
 			}
 		}
 	}
