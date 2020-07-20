@@ -108,6 +108,32 @@
 			</view>
 			<view class="loading-text">{{ loadingText }}</view>
 		</view>
+		
+		<view class="tuijian">为您推荐</view>
+		<view class="tuijianBox">
+			<view class="tuijianList">
+				<view>
+					<view class="imageBox"><image class="caomei" src="../../../static/img/caomei.png"></image></view>
+					<view class="fruitName">草莓220g</view>
+					<view class="tuijianPrice"><text class="Rmb">￥</text class="num5"><text>5</text></view>
+				</view>
+				<view>
+					<view class="imageBox"><image class="ningmeng" src="../../../static/img/ningmeng2.png"></image></view>
+					<view class="fruitName">柠檬220g</view>
+					<view class="tuijianPrice"><text class="Rmb">￥</text><text class="num5">5</text></view>
+				</view>
+				<view>
+					<view class="imageBox"><image class="mihoutao" src="../../../static/img/mihoutao.png"></image></view>
+					<view class="fruitName">猕猴桃220g</view>
+					<view class="tuijianPrice"><text class="Rmb">￥</text><text class="num5">5</text></view>
+				</view>
+				<view>
+					<view class="imageBox"><image class="caomei" src="../../../static/img/caomei.png"></image></view>
+					<view class="fruitName">草莓220g</view>
+					<view class="tuijianPrice"><text class="Rmb">￥</text><text class="num5">5</text></view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -274,29 +300,29 @@
 			}, 1000);
 		},
 		//上拉加载，需要自己在page.json文件中配置"onReachBottomDistance"
-		onReachBottom() {
-			uni.showToast({
-				title: '触发上拉加载'
-			});
-			let len = this.productList.length;
-			if (len >= 40) {
-				this.loadingText = '到底了';
-				return false;
-			}
-			// 演示,随机加入商品,生成环境请替换为ajax请求
-			let end_goods_id = this.productList[len - 1].goods_id;
-			for (let i = 1; i <= 10; i++) {
-				let goods_id = end_goods_id + i;
-				let p = {
-					goods_id: goods_id,
-					img: '/static/img/goods/p' + (goods_id % 10 == 0 ? 10 : goods_id % 10) + '.jpg',
-					name: '商品名称商品名称商品名称商品名称商品名称',
-					price: '￥168',
-					slogan: '1235人付款'
-				};
-				this.productList.push(p);
-			}
-		},
+		// onReachBottom() {
+		// 	uni.showToast({
+		// 		title: '触发上拉加载'
+		// 	});
+		// 	let len = this.productList.length;
+		// 	if (len >= 40) {
+		// 		this.loadingText = '到底了';
+		// 		return false;
+		// 	}
+		// 	// 演示,随机加入商品,生成环境请替换为ajax请求
+		// 	let end_goods_id = this.productList[len - 1].goods_id;
+		// 	for (let i = 1; i <= 10; i++) {
+		// 		let goods_id = end_goods_id + i;
+		// 		let p = {
+		// 			goods_id: goods_id,
+		// 			img: '/static/img/goods/p' + (goods_id % 10 == 0 ? 10 : goods_id % 10) + '.jpg',
+		// 			name: '商品名称商品名称商品名称商品名称商品名称',
+		// 			price: '￥168',
+		// 			slogan: '1235人付款'
+		// 		};
+		// 		this.productList.push(p);
+		// 	}
+		// },
 		onLoad() {
 
 			// #ifdef APP-PLUS
@@ -478,7 +504,7 @@
 <style lang="scss">
 	page {
 		position: relative;
-		background-color: #fff;
+		background-color: #F1F1F1;
 	}
 
 	@font-face {
@@ -523,7 +549,7 @@
 		align-items: center;
 		position: fixed;
 		top: 0;
-		z-index: 10;
+		z-index: 21;
 		background-color: #fff;
 
 		/*  #ifdef  APP-PLUS  */
@@ -556,6 +582,7 @@
 			position: relative;
 			display: flex;
 			align-items: center;
+			// z-index: 101;
 
 			.icon {
 				display: flex;
@@ -929,5 +956,71 @@
 				}
 			}
 		}
+	}
+	
+	.tuijian{
+		color: #55C37D;	
+		font-size: 36upx;
+		font-weight: bold;
+		margin-left: 31upx;
+		margin-top: 39upx;
+		margin-bottom: 40upx;
+		line-height: 52upx;
+	}
+	.tuijianBox{
+		width:710upx;
+		height:330upx;
+		background:rgba(255,255,255,1);
+		border-radius:10upx;
+		// border: 1upx solid gray;
+		margin-left: 20upx;
+		margin-bottom: 20upx;
+		margin-right: 20upx;
+		// box-shadow: ;
+		
+		.tuijianList{
+			display: flex;
+			justify-content: space-around;
+			margin-top: 47upx;
+			.imageBox{
+				width: 140upx;
+				height: 140upx;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.caomei{
+				width: 100upx;
+				height: 86upx;
+			}
+			.ningmeng{
+				width: 163upx;
+				height: 94upx;
+			}
+			.mihoutao{
+				width: 114upx;
+				height: 78upx;
+				
+			}
+			.fruitName{
+				color: #333333;
+				font-size: 30upx;
+				font-weight: 550;
+				line-height: 52upx;
+				letter-spacing: 2upx;
+				margin-top: 19upx;
+			}
+			.tuijianPrice{
+				color: #F21408;
+				text-align: center;
+				.Rmb{
+					font-size: 23.54upx;
+				}
+				.num5{
+					font-size: 34.24upx;
+				}
+			}
+		}
+		
 	}
 </style>
